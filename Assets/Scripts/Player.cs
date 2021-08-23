@@ -5,7 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] int speed;
-    float minX, maxX, minY, maxY;
+    [SerializeField] GameObject bullet;
+    [SerializeField] float nextFire;
+    float minX, maxX, minY, maxY, SpriteSizeInX, SpriteSizeInY, canFire;
 
     // Start is called before the first frame update
     void Start()
@@ -15,8 +17,8 @@ public class Player : MonoBehaviour
         //thus it is okay to use it
         Vector2 UpperRightCorner = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-        float SpriteSizeInX = GetComponent<SpriteRenderer>().bounds.size.x;
-        float SpriteSizeInY = GetComponent<SpriteRenderer>().bounds.size.y;
+        SpriteSizeInX = GetComponent<SpriteRenderer>().bounds.size.x;
+        SpriteSizeInY = GetComponent<SpriteRenderer>().bounds.size.y;
 
         maxX = UpperRightCorner.x - SpriteSizeInX/2;
         maxY = UpperRightCorner.y - SpriteSizeInY/2;
@@ -31,6 +33,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Move();
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= canFire)
+        {
+            canFire = Time.time + nextFire;
+            Fire();
+        }
+    }
+
+    void Move()
+    {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
@@ -40,5 +52,10 @@ public class Player : MonoBehaviour
         float newPositionInY = Mathf.Clamp(transform.position.y, minY, maxY);
 
         transform.position = new Vector2(newPositionInX, newPositionInY);
+    }
+
+    void Fire()
+    {
+       Instantiate(bullet, transform.position - new Vector3(0, SpriteSizeInY/2, 0), transform.rotation);
     }
 }
