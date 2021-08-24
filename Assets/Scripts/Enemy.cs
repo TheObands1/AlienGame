@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int speed;
+    [SerializeField] int speed, numberOfHearts;
+    [SerializeField] GameObject heartObject;
     float minX, maxX;
     [SerializeField] bool isGoingRight;
+    GameObject[] ArrayOfHearts;
+    float SpriteSizeInX, SpriteSizeInY;
+    private Heart heartReference;
     // Start is called before the first frame update
     void Start()
     {
         Vector2 RightCorner = Camera.main.ViewportToWorldPoint(new Vector2(1, 0));
         Vector2 LeftCorner = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 
-        float SpriteSizeInX = GetComponent<SpriteRenderer>().bounds.size.x;
+        SpriteSizeInX = GetComponent<SpriteRenderer>().bounds.size.x;
+        SpriteSizeInY = GetComponent<SpriteRenderer>().bounds.size.y;
 
         maxX = RightCorner.x - SpriteSizeInX / 2;
         minX = LeftCorner.x + SpriteSizeInX / 2;
 
+        CreateHearts();
     }
 
     // Update is called once per frame
@@ -41,4 +47,35 @@ public class Enemy : MonoBehaviour
             isGoingRight = true;
         }
     }
+
+    void CreateHearts()
+    {
+        float firstPos = -0.5f;
+        ArrayOfHearts = new GameObject[numberOfHearts];
+        for (int i = 0; i < numberOfHearts; i++)
+        {
+            firstPos += 0.2f;
+            GameObject newHeart = Instantiate(heartObject, transform.position + new Vector3((firstPos), SpriteSizeInY / 1.5f, 0), transform.rotation, transform) as GameObject;
+            ArrayOfHearts[i] = newHeart;
+        }
+    }
+
+    public void ReceiveDamage()
+    {
+        if(numberOfHearts > 1)
+        {
+            Heart CurrentHeartReference = ArrayOfHearts[(numberOfHearts - 1)].GetComponent<Heart>();
+            if(CurrentHeartReference != null)
+            {
+                CurrentHeartReference.ChangeHeartSprite();
+                numberOfHearts -= 1;
+            }
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+    }
+
 }

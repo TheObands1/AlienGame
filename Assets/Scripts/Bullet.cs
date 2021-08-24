@@ -21,7 +21,11 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.tag == "Animal")
         {
-            Destroy(collision.gameObject);
+            Enemy HitEnemy = collision.gameObject.GetComponent<Enemy>();
+            if(HitEnemy != null)
+            {
+                HitEnemy.ReceiveDamage();
+            }
         }
         if (!collision.gameObject.CompareTag("Bullet"))
         {

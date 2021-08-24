@@ -97,5 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  numberOfHearts: 0
   bullet: {fileID: 1114608885930200341, guid: fc9b8b534fc587a408c5c075de867820, type: 3}
+  heart: {fileID: 349605890350830334, guid: 52abb8bcc8cc5ed4186cdd2843eedef4, type: 3}
   nextFire: 0.35
