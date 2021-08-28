@@ -428,6 +428,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1424112235971025718, guid: 0a2c16f65cf350d4ebb382df19661a85, type: 3}
+      propertyPath: numberOfHearts
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a2c16f65cf350d4ebb382df19661a85, type: 3}
 --- !u!1 &213430346
@@ -1788,6 +1792,14 @@ PrefabInstance:
     - target: {fileID: 1351323593007250608, guid: badd2eaad1ba0a149a60d2db752576e1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1351323593007250609, guid: badd2eaad1ba0a149a60d2db752576e1, type: 3}
+      propertyPath: bullet2
+      value: 
+      objectReference: {fileID: 6722183078000883846, guid: 2b2e7b42e87703e438c92c23e3cf2777, type: 3}
+    - target: {fileID: 1351323593007250609, guid: badd2eaad1ba0a149a60d2db752576e1, type: 3}
+      propertyPath: nextFire2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1351323593007250610, guid: badd2eaad1ba0a149a60d2db752576e1, type: 3}
       propertyPath: m_SortingOrder

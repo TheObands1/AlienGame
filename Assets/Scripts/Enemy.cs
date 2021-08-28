@@ -10,10 +10,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool isGoingRight;
     GameObject[] ArrayOfHearts;
     float SpriteSizeInX, SpriteSizeInY;
-    private Heart heartReference;
+    [SerializeField] bool col = true;
+   
     // Start is called before the first frame update
     void Start()
     {
+        col = true;
         Vector2 RightCorner = Camera.main.ViewportToWorldPoint(new Vector2(1, 0));
         Vector2 LeftCorner = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 
@@ -29,7 +31,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isGoingRight)
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            damageType();
+        }
+        if (isGoingRight)
         {
             transform.Translate(new Vector2((Time.deltaTime * speed), 0));
         }
@@ -60,22 +66,63 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void ReceiveDamage()
+    void damageType()
     {
-        if(numberOfHearts > 1)
+        if (!col)
         {
-            Heart CurrentHeartReference = ArrayOfHearts[(numberOfHearts - 1)].GetComponent<Heart>();
-            if(CurrentHeartReference != null)
-            {
-                CurrentHeartReference.ChangeHeartSprite();
-                numberOfHearts -= 1;
-            }
+            col = true;
         }
         else
         {
-            Destroy(this.gameObject);
+            col = false;
         }
-
     }
+    public void ReceiveDamage()
+    {
+        if(col)
+        {
+            if (numberOfHearts > 1)
+            {
+
+                Heart CurrentHeartReference = ArrayOfHearts[(numberOfHearts - 1)].GetComponent<Heart>();
+
+                if (CurrentHeartReference != null)
+                {
+                    CurrentHeartReference.ChangeHeartSprite();
+                    numberOfHearts -= 1;
+
+                }
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+
+        }
+        else
+        {
+            for(int i =0; i<2;i++)
+            {
+                if (numberOfHearts > 1)
+                {
+
+                    Heart CurrentHeartReference = ArrayOfHearts[(numberOfHearts - 1)].GetComponent<Heart>();
+
+                    if (CurrentHeartReference != null)
+                    {
+                        CurrentHeartReference.ChangeHeartSprite();
+                        numberOfHearts -= 1;
+
+                    }
+                }
+                else
+                {
+                    Destroy(this.gameObject);
+                }
+            }
+        }
+       
+    }
+
 
 }

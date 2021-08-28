@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
                 HitEnemy.ReceiveDamage();
             }
         }
-        if (!collision.gameObject.CompareTag("Bullet"))
+        if (!collision.gameObject.CompareTag("Bullet") || !collision.gameObject.CompareTag("Bullet2"))
         {
             Destroy(this.gameObject);
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Animal
   - Bullet
+  - Bullet2
   layers:
   - Default
   - TransparentFX

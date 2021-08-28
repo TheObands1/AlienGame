@@ -5,9 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] int speed;
-    [SerializeField] GameObject bullet;
-    [SerializeField] float nextFire;
+    [SerializeField] GameObject bullet, bullet2;
+    [SerializeField] float nextFire, nextFire2;
     float minX, maxX, minY, maxY, SpriteSizeInX, SpriteSizeInY, canFire;
+    public bool fireType = true;
 
     // Start is called before the first frame update
     void Start()
@@ -33,12 +34,25 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            fireChange();
+        }
+        
         Move();
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= canFire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= canFire && fireType)
         {
             canFire = Time.time + nextFire;
             Fire();
         }
+        if(Input.GetKeyDown(KeyCode.Space) && Time.time >= canFire && !fireType)
+        {
+            canFire = Time.time + nextFire2;
+            fire2();
+        }
+           
+            
+            
     }
 
     void Move()
@@ -56,6 +70,22 @@ public class Player : MonoBehaviour
 
     void Fire()
     {
-       Instantiate(bullet, transform.position - new Vector3(0, SpriteSizeInY/2, 0), transform.rotation);
+        Instantiate(bullet, transform.position - new Vector3(0, SpriteSizeInY / 2, 0), transform.rotation);
+    }
+    void fire2()
+    {
+        Instantiate(bullet2, transform.position - new Vector3(0, SpriteSizeInY / 2, 0), transform.rotation);
+    }
+    void fireChange()
+    {
+              
+        if(!fireType)
+        {
+            fireType = true;
+        }
+        else
+        {
+            fireType = false;
+        }
     }
 }
