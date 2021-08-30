@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
         Vector2 LowerLeftCorner = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         minX = LowerLeftCorner.x + SpriteSizeInX/2;
-        minY = LowerLeftCorner.y + 5;
+        minY = LowerLeftCorner.y + 7;
         Debug.Log(minY.ToString());
 
     }

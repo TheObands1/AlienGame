@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  numberOfHearts: 2
+  numberOfHearts: 8
   heartObject: {fileID: 349605890350830334, guid: 52abb8bcc8cc5ed4186cdd2843eedef4, type: 3}
   isGoingRight: 1
+  col: 1

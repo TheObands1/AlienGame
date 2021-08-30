@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
 
     void CreateHearts()
     {
-        float firstPos = -0.5f;
+        float firstPos = -0.5f * numberOfHearts/4.5f ;
         ArrayOfHearts = new GameObject[numberOfHearts];
         for (int i = 0; i < numberOfHearts; i++)
         {
