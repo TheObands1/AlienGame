@@ -10,12 +10,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool isGoingRight;
     GameObject[] ArrayOfHearts;
     float SpriteSizeInX, SpriteSizeInY;
-    [SerializeField] bool col = true;
+    [SerializeField] bool IsReceivingDamageFromBullet1 = true;
    
     // Start is called before the first frame update
     void Start()
     {
-        col = true;
+        IsReceivingDamageFromBullet1 = true;
         Vector2 RightCorner = Camera.main.ViewportToWorldPoint(new Vector2(1, 0));
         Vector2 LeftCorner = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 
@@ -68,18 +68,18 @@ public class Enemy : MonoBehaviour
 
     void damageType()
     {
-        if (!col)
+        if (!IsReceivingDamageFromBullet1)
         {
-            col = true;
+            IsReceivingDamageFromBullet1 = true;
         }
         else
         {
-            col = false;
+            IsReceivingDamageFromBullet1 = false;
         }
     }
     public void ReceiveDamage()
     {
-        if(col)
+        if(IsReceivingDamageFromBullet1)
         {
             if (numberOfHearts > 1)
             {
